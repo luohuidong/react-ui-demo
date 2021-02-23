@@ -1,0 +1,16 @@
+@use "color";
+
+$link-color: color.$primary !default;
+$link-decoration: none !default;
+$link-hover-color: darken(color.$link-color, 15%) !default;
+$link-hover-decoration: underline !default;
+
+%link {
+  color: color.$link-color;
+  text-decoration: color.$link-decoration;
+
+  &:hover {
+      text-decoration: $link-hover-decoration;
+      color: $link-hover-color;
+  }
+}
