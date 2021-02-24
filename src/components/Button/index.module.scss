@@ -1,63 +1,95 @@
-@use '../../styles/font';
-@use 'styles/color';
+@use '../../styles/font' as font-v;
+@use 'styles/color' as color-v;
+@use "sass:color";
 
-$border-width:                1px !default;
-$border-color:                color.$gray-300 !default;
+%btn-type-share {
+  background: none;
+  border: 1px solid color-v.$gray-500;
+  outline: none;
 
-// $border-radius:               .25rem !default;
-// $border-radius-lg:            .3rem !default;
-// $border-radius-sm:            .2rem !default;
+  cursor: pointer;
 
-// // 按钮基本属性
-// $btn-padding-y: 0.375rem !default;
-// $btn-padding-x: 0.75rem !default;
-// // $btn-font-family: font1.$font-family-base !default;
-// // $btn-font-size: font1.$font-size-base !default;
-// // $btn-line-height: font1.$line-height-base !default;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
-// //不同大小按钮的 padding 和 font size
-// $btn-padding-y-sm: 0.25rem !default;
-// $btn-padding-x-sm: 0.5rem !default;
-// // $btn-font-size-sm: font1.$font-size-sm !default;
+  &.btn-disable {
+    cursor: not-allowed;
+    opacity: 0.65;
 
-// $btn-padding-y-lg: 0.5rem !default;
-// $btn-padding-x-lg: 1rem !default;
-// // $btn-font-size-lg: font1.$font-size-lg !default;
-
-// // 按钮边框
-// $btn-border-width: $border-width !default;
-
-// // 按钮其他
-// $btn-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px rgba($black, 0.075) !default;
-// $btn-disabled-opacity: 0.65 !default;
-
-// // 链接按钮
-// $btn-link-color: $link-color !default;
-// $btn-link-hover-color: $link-hover-color !default;
-// $btn-link-disabled-color: color.$gray-600;
-
-
-
-// // 按钮 radius
-// $btn-border-radius: $border-radius !default;
-// $btn-border-radius-lg: $border-radius-lg !default;
-// $btn-border-radius-sm: $border-radius-sm !default;
-
-// $btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-//   border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
-
-
-.btn {
-    font-weight: 400;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
-    padding: 0.375rem 0.75rem;
-    border-radius: .25rem;
-    outline: none;
-    
-
-    &-disable {
-        cursor: not-allowed;
+    > * {
+      pointer-events: none;
     }
+  }
+}
+
+.btn-type-default {
+  @extend %btn-type-share;
+
+  &:not(.btn-disable):hover {
+    border: 1px solid color-v.$blue;
+    color: color-v.$blue;
+  }
+}
+.btn-type-primary {
+  @extend %btn-type-share;
+  background-color: color-v.$blue;
+  color: color-v.$white;
+  border-color: color-v.$blue;
+
+  &:not(.btn-disable):hover {
+    background-color: lighten(color-v.$blue, 10%);
+    border-color: lighten(color-v.$blue, 10%);
+  }
+}
+.btn-type-danger {
+  @extend %btn-type-share;
+  color: color-v.$red;
+  border-color: color-v.$red;
+
+  &:not(.btn-disable):hover {
+    color: lighten(color-v.$red, 15%);
+    border-color: lighten(color-v.$red, 15%);
+  }
+}
+.btn-type-link {
+  @extend %btn-type-share;
+  color: color-v.$blue;
+
+  background: none;
+  border: none;
+  box-shadow: none;
+
+  &:hover {
+    color: lighten(color-v.$blue, 10%)
+  }
+
+  & > a {
+    color: color-v.$blue;
+    text-decoration: none;
+
+    &:hover {
+      color: lighten(color-v.$blue, 10%)
+    }
+  }
+
+  &.btn-disable {
+    color: color-v.$gray-700;
+  }
+}
+
+@mixin btn-size($padding-x, $padding-y, $border-radius, $font-size) {
+  padding: $padding-y $padding-x;
+  border-radius: $border-radius;
+
+  font-size: $font-size;
+  font-weight: 400;
+}
+.btn-size-normal {
+  @include btn-size(0.75rem, 0.375rem, 0.25rem, font-v.$font-size-base);
+}
+.btn-size-large {
+  @include btn-size(1rem, 0.5rem, 0.3rem, font-v.$font-size-lg);
+}
+.btn-size-small {
+  @include btn-size(0.5rem, 0.25rem, 0.3rem, font-v.$font-size-sm);
 }

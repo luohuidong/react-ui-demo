@@ -8,7 +8,12 @@ function App() {
       <Button>Default</Button>
       <Button type={ButtonType.Danger}>Danger</Button>
       <Button disabled>Disabled</Button>
-      <Button type={ButtonType.Link}>Link</Button>
+
+      <Button type={ButtonType.Link} href="https://www.baidu.com">Link</Button>
+      <Button type={ButtonType.Link} disabled>Link</Button>
+
+      <Button size={ButtonSize.Large}>Large</Button>
+      <Button size={ButtonSize.Small}>Small</Button>
 
       <header className="App-header">
         <p>
